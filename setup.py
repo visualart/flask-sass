@@ -1,34 +1,40 @@
 """
-flask-coffee2js
-===============
+flask-sass
+==========
 
-A small Flask extension that makes it easy to use CoffeeScript with your Flask application.
+A small Flask extension that makes it easy to use Sass (SCSS) with your Flask application.
+
+Package unabashedly adapted from https://github.com/weapp/flask-coffee2js.
 
 Usage
 -----
 
-You can activate it by calling the ``coffee2js`` function with your Flask app as a parameter:
+You can activate it by calling the ``sass`` function with your Flask app as a parameter:
 
-      from flaskext.coffee2js import coffee2js
-      coffee2js(app, js_folder='js', coffee_folder='src/coffee')
+      from flaskext.sass import sass
+      sass(app, input_dir='assets/scss', output_dir='static/css')
 
-This will intercept the request to ``js_folder`` and compile de file if is necesary using the files from ``coffee_folder``.
+This will intercept the request for ``output_dir/*.css`` and compile the file if it is
+necesary using the files from ``input_dir/*.scss``.
 
-When you deploy your app you might not want to accept the overhead of checking the modification time of your ``.coffee`` and ``.jss`` files on each request. A simple way to avoid this is wrapping the coffee2js call in an if statement:
+When you deploy your app you might not want to accept the overhead of checking
+the modification time of your ``.scss`` and ``.css`` files on each request. A
+simple way to avoid this is wrapping the sass call in an if statement:
 
       if app.debug:
-          from flaskext.coffee2js import coffee2js
-          coffee2js(app)
+          from flaskext.sass import sass
+          sass(app)
           
-If you do this you'll be responsible for rendering the ``.coffee`` files into ``.js`` when you deploy in non-debug mode to your production server.
+If you do this you'll be responsible for rendering the ``.scss`` files into
+``.css`` when you deploy in non-debug mode to your production server.
 
 
 - documentation_
 - development_
 
 
-.. _documentation: https://github.com/weapp/flask-coffee2js
-.. _development: https://github.com/weapp/flask-coffee2js
+.. _documentation: https://github.com/imiric/flask-sass
+.. _development: https://github.com/imiric/flask-sass
 
 """
 
@@ -36,13 +42,13 @@ from setuptools import setup
 
 
 setup(
-    name='flask-coffee2js',
-    version='0.1.2',
-    url='https://github.com/weapp/flask-coffee2js',
+    name='flask-sass',
+    version='0.1',
+    url='https://github.com/imiric/flask-sass',
     license='MIT',
-    author='Manuel Albarran',
+    author='Ivan Miric',
     #author_email='',
-    description='A small Flask extension that adds CoffeScript support to Flask.',
+    description='A small Flask extension that adds Sass (SCSS) support to Flask.',
     long_description=__doc__,
     packages=['flaskext'],
     namespace_packages=['flaskext'],
@@ -50,7 +56,7 @@ setup(
     platforms='any',
     install_requires=[
         'Flask',
-        'CoffeeScript'
+        'pyScss'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
