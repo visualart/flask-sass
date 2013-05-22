@@ -40,7 +40,7 @@ def sass(app, input_dir='assets/sass', output_dir='css', force=False):
         input_dir = os.path.join(app.root_path, input_dir)
 
     def _sass(filepath):
-        sassfile = "%s/%s.scss" % (input_dir, filepath)
+        sassfile = "%s/%s.sass" % (input_dir, filepath)
         filename = "%s/%s.css" % (output_dir, filepath)
         cssfile = "%s%s/%s" % (app.root_path, static_url_path, filename)
 
